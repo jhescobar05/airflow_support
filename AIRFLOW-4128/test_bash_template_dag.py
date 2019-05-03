@@ -19,12 +19,8 @@ def print_the_new_timezone(**context):
     print("execution_date in ISO Format: {}".format(execution_date))
 
     # Convert UTC execution date to US/Pacific
-    utc_tz = dateutil.tz.gettz('UTC')
-    to_zone = dateutil.tz.gettz('US/Pacific')
-    utc_object = datetime.strptime(execution_date, '%Y-%m-%dT%H:%M:%S.%f+00:00')
-    new_utc_object = utc_object.replace(tzinfo=utc_tz)
-    converted_datetime = new_utc_object.astimezone(to_zone)
-
+    local_tz = pendulum.timezone("US/Pacific")
+    new_datetime_object = local_tz.convert(execution_date)
     print("Converted datetime: {}".format(converted_datetime))
 
 local_tz = pendulum.timezone("US/Pacific")
